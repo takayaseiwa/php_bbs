@@ -1,3 +1,11 @@
+<?php
+$form = [];
+$error = [];
+$form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+if ($form['name'] === '') {
+    $error['name'] = 'blank';
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -23,7 +31,9 @@
                 <dt>ニックネーム<span class="required">必須</span></dt>
                 <dd>
                     <input type="text" name="name" size="35" maxlength="255" value=""/>
+                    <?php if($error['name'] === 'blank'): ?>
                     <p class="error">* ニックネームを入力してください</p>
+                    <?php endif; ?>
                 </dd>
                 <dt>メールアドレス<span class="required">必須</span></dt>
                 <dd>
